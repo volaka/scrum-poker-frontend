@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Form } from 'semantic-ui-react';
 import { stripIndent } from 'common-tags';
 import ErrorMessage from '../../presentational/ErrorMessage/ErrorMessage';
 import InputField from '../../presentational/AddStoryForm/InputField/InputField';
 import TextAreaField from '../../presentational/AddStoryForm/TextAreaField/TextAreaField';
+import { addSprint } from '../../../redux/actions/AddStoryActions';
 
 class AddStoryForm extends Component {
   state = {
@@ -65,18 +66,20 @@ class AddStoryForm extends Component {
       this.setState({ formError: 'Please control all the fields and fix the errors.' });
     } else {
       // If there are no errors, submit the request
-      console.log(this.state);
+      this.props.addSprint({ name, voter, storyList });
     }
   };
 
   render() {
     const { name, voter, storyList, voterError, nameError, storyListError, formError } = this.state;
+    const { error, loading } = this.props.addStoryState;
     return (
       <Form
-        error={!!voterError || !!nameError || !!storyListError || !!formError}
+        error={!!voterError || !!nameError || !!storyListError || !!formError || !!error}
         onSubmit={this.handleSubmit}
       >
         {!!formError && <ErrorMessage message={formError} />}
+        {!!error && <ErrorMessage message={`Request Error: ${error}`} />}
         <Form.Group widths='equal'>
           <InputField
             placeholder={'Sprint 1'}
@@ -114,16 +117,24 @@ class AddStoryForm extends Component {
         <Form.Button
           primary floated={'right'}
           content={'Start Session'} style={{ marginLeft: 'auto' }}
+          loading={loading}
         />
       </Form>
     );
   }
 }
 
-AddStoryForm.propTypes = {};
+AddStoryForm.propTypes = {
+  addStoryState: PropTypes.object.isRequired,
+  addSprint: PropTypes.func.isRequired,
+};
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ addStory }) => ({
+  addStoryState: addStory
+});
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addSprint
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddStoryForm);

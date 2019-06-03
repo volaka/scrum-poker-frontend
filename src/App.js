@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
 import styles from './App.scss';
 import AddStory from './views/AddStory/AddStory';
+import PlanningView from './views/PlanningView/PlanningView';
 
 class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
         </div>
         <Switch>
           <Route path={'/poker-planning-add-story-list'} component={AddStory} />
+          <Route path={'/poker-planning-view-as-scrum-master'} component={PlanningView} />
         </Switch>
       </div>
     );
