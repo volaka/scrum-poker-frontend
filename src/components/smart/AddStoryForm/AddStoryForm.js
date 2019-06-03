@@ -93,6 +93,7 @@ class AddStoryForm extends Component {
             value={voter}
             name={'voter'}
             error={voterError}
+            type={'number'}
           />
         </Form.Group>
         <TextAreaField

@@ -19,6 +19,11 @@ describe('Add Story Test', () => {
     cy.get('[name="name"]').type(name);
     cy.contains('Name cannot be more than 200 characters.').should('be.exist');
   });
+  it('voter count should be empty if user tries to enter a character other than number.', () => {
+    cy.visit('/poker-planning-add-story-list');
+    cy.get('[name="name"]').type('voter');
+    cy.get('[name="voter"]').should('not.have.value', 'voter');
+  });
   it('should print error to input 0 for field voter count.', () => {
     cy.visit('/poker-planning-add-story-list');
     cy.get('[name="voter"]').type('0');
