@@ -13,14 +13,18 @@ class App extends React.Component {
     return (
       <div className={'container'}>
         <div className={'row'}>
-          <div className={styles.image}>
-            Scrum Poker
+          <div className="col">
+            <div className={styles.image}>
+              Scrum Poker
+            </div>
           </div>
-          <p>Link http://localhost:3000/scrum-master/sprint-1</p>
+          <div className="col">
+            <div>Link http://localhost:3000/scrum-master/sprint-1</div>
+          </div>
         </div>
         <Switch>
           <Route path={'/poker-planning-add-story-list'} component={AddStory} />
-          <Route path={'/poker-planning-view-as-scrum-master'} component={PlanningView} />
+          <Route path={'/poker-planning-view-as-scrum-master/:name'} component={PlanningView} />
         </Switch>
       </div>
     );
