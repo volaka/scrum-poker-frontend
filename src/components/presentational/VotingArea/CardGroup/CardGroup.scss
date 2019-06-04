@@ -1,0 +1,22 @@
+.card-group {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin-top: 14px !important;
+  padding: 16px;
+  position: relative;
+}
+
+.card-footer {
+  width: 100% !important;
+  text-align: center;
+}
+
+.vote-header {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  z-index: 99;
+  background: white;
+  text-align: center;
+  padding: 0 8px;
+}

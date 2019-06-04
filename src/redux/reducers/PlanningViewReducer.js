@@ -11,6 +11,21 @@ const INITIAL_STATE = {
     loading: false,
     error: null,
     stories: []
+  },
+  votes: {
+    loading: false,
+    error: null,
+    votes: []
+  },
+  voting: {
+    loading: false,
+    error: null,
+    result: null,
+  },
+  finalize: {
+    loading: false,
+    error: null,
+    result: null
   }
 };
 
@@ -43,7 +58,6 @@ export default (state = INITIAL_STATE, action) => {
         stories: {
           loading: { $set: true },
           error: { $set: null },
-          stories: { $set: [] }
         }
       });
     case PlanningView.GET_SPRINT_STORIES_SUCCESS:
@@ -56,6 +70,93 @@ export default (state = INITIAL_STATE, action) => {
     case PlanningView.GET_SPRINT_STORIES_FAIL:
       return update(state, {
         stories: {
+          loading: { $set: true },
+          error: { $set: action.payload },
+        }
+      });
+    case PlanningView.GET_SPRINT_ACTIVE_STORY_VOTES_REQUEST:
+      return update(state, {
+        votes: {
+          loading: { $set: true },
+          error: { $set: null },
+        }
+      });
+    case PlanningView.GET_SPRINT_ACTIVE_STORY_VOTES_SUCCESS:
+      return update(state, {
+        votes: {
+          loading: { $set: false },
+          votes: { $set: action.payload }
+        }
+      });
+    case PlanningView.GET_SPRINT_ACTIVE_STORY_VOTES_FAIL:
+      return update(state, {
+        votes: {
+          loading: { $set: true },
+          error: { $set: action.payload },
+        }
+      });
+    case PlanningView.VOTE_STORY_REQUEST:
+      return update(state, {
+        voting: {
+          loading: { $set: true },
+          error: { $set: null },
+          result: { $set: null },
+        }
+      });
+    case PlanningView.VOTE_STORY_SUCCESS:
+      return update(state, {
+        voting: {
+          loading: { $set: false },
+          result: { $set: action.payload }
+        }
+      });
+    case PlanningView.VOTE_STORY_FAIL:
+      return update(state, {
+        voting: {
+          loading: { $set: true },
+          error: { $set: action.payload },
+        }
+      });
+    case PlanningView.CHANGE_VOTE_STORY_REQUEST:
+      return update(state, {
+        voting: {
+          loading: { $set: true },
+          error: { $set: null },
+          result: { $set: null },
+        }
+      });
+    case PlanningView.CHANGE_VOTE_STORY_SUCCESS:
+      return update(state, {
+        voting: {
+          loading: { $set: false },
+          result: { $set: action.payload }
+        }
+      });
+    case PlanningView.CHANGE_VOTE_STORY_FAIL:
+      return update(state, {
+        voting: {
+          loading: { $set: true },
+          error: { $set: action.payload },
+        }
+      });
+    case PlanningView.FINALIZE_STORY_REQUEST:
+      return update(state, {
+        finalize: {
+          loading: { $set: true },
+          error: { $set: null },
+          result: { $set: null },
+        }
+      });
+    case PlanningView.FINALIZE_STORY_SUCCESS:
+      return update(state, {
+        finalize: {
+          loading: { $set: false },
+          result: { $set: action.payload }
+        }
+      });
+    case PlanningView.FINALIZE_STORY_FAIL:
+      return update(state, {
+        finalize: {
           loading: { $set: true },
           error: { $set: action.payload },
         }

@@ -1,3 +1,6 @@
+.container {
+  margin-top: 64px;
+}
 .image {
   font-size: 26pt;
   width: 128px;
@@ -7,4 +10,10 @@
   text-align: center;
   border: 2px solid darkcyan;
   line-height: normal;
+}
+
+.sprint-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }

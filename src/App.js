@@ -4,27 +4,45 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import * as classnames from 'classnames';
+import has from 'lodash/has';
 import styles from './App.scss';
 import AddStory from './views/AddStory/AddStory';
 import PlanningView from './views/PlanningView/PlanningView';
+import DeveloperView from './views/DeveloperView/DeveloperView';
 
 class App extends React.Component {
   render() {
+    console.log(window.location.origin);
     return (
-      <div className={'container'}>
+      <div className={classnames('container', styles.container)}>
         <div className={'row'}>
-          <div className="col">
+          {/* Image Area */}
+          <div className="col-4">
             <div className={styles.image}>
               Scrum Poker
             </div>
           </div>
-          <div className="col">
-            <div>Link http://localhost:3000/scrum-master/sprint-1</div>
+          {/* Link Area */}
+          <div className={classnames('col-8', styles['sprint-link'])}>
+            {
+              this.props.router.location.pathname.match(/.*scrum-master.*/) &&
+              this.props.router.location.pathname.match(/.*scrum-master.*/).length > 0 &&
+              <span>
+              {window.location.origin}/poker-planning-view-as-developer/
+                {
+                  has(this.props.details.details, 'dev_link') ?
+                    this.props.details.details.dev_link : ''
+                }
+            </span>
+            }
           </div>
         </div>
+        {/* Routes */}
         <Switch>
           <Route path={'/poker-planning-add-story-list'} component={AddStory} />
           <Route path={'/poker-planning-view-as-scrum-master/:name'} component={PlanningView} />
+          <Route path={'/poker-planning-view-as-developer/:name'} component={DeveloperView} />
         </Switch>
       </div>
     );
@@ -35,8 +53,9 @@ App.propTypes = {
   router: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ router }) => ({
+const mapStateToProps = ({ router, planningView }) => ({
   router,
+  details: planningView.details
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
