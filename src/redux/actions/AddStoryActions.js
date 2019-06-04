@@ -12,9 +12,9 @@ export const addSprint = (data) => dispatch => {
     method: 'POST',
     url: '/api/sprint',
     data
-  }).then(response => {
+  }).then(() => {
     dispatch({ type: AddStory.ADD_SPRINT_SUCCESS });
-    dispatch(push(`/poker-planning-view-as-scrum-master/${response.data.name}`));
+    dispatch(push(`/poker-planning-view-as-scrum-master/${data.name}`));
   })
     .catch(error => {
       dispatch({

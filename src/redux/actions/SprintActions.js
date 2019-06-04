@@ -1,6 +1,25 @@
 import axios from 'axios';
 import { PlanningView } from '../types';
 
+export const getAllSprints = () => dispatch => {
+  dispatch({ type: PlanningView.GET_ALL_SPRINTS_REQUEST });
+  axios({
+    method: 'GET',
+    url: '/api/sprint'
+  }).then(response => {
+    dispatch({
+      type: PlanningView.GET_ALL_SPRINTS_SUCCESS,
+      payload: response.data.result
+    });
+  })
+    .catch(error => {
+      dispatch({
+        type: PlanningView.GET_ALL_SPRINTS_FAIL,
+        payload: error.response.data.result || error.response.message
+      });
+    });
+};
+
 export const getSprintDetails = (name) => dispatch => {
   dispatch({ type: PlanningView.GET_SPRINT_DETAILS_REQUEST });
   axios({
@@ -68,10 +87,9 @@ export const voteStory = (storyId, point, voter, sprintName) => dispatch => {
       point,
       voter
     }
-  }).then(response => {
+  }).then(() => {
     dispatch({
-      type: PlanningView.VOTE_STORY_SUCCESS,
-      payload: response.data.result
+      type: PlanningView.VOTE_STORY_SUCCESS
     });
     dispatch(getSprintActiveStoryVotes(sprintName));
   })

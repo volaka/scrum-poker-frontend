@@ -2,6 +2,11 @@ import update from 'immutability-helper';
 import { PlanningView } from '../types';
 
 const INITIAL_STATE = {
+  sprints: {
+    loading: false,
+    error: null,
+    sprints: []
+  },
   details: {
     loading: false,
     error: null,
@@ -20,7 +25,6 @@ const INITIAL_STATE = {
   voting: {
     loading: false,
     error: null,
-    result: null,
   },
   finalize: {
     loading: false,
@@ -31,12 +35,25 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case PlanningView.GET_SPRINT_DETAILS_REQUEST:
+    case PlanningView.GET_ALL_SPRINTS_REQUEST:
       return update(state, {
-        details: {
+        sprints: {
           loading: { $set: true },
           error: { $set: null },
-          details: { $set: {} }
+        }
+      });
+    case PlanningView.GET_ALL_SPRINTS_SUCCESS:
+      return update(state, {
+        sprints: {
+          loading: { $set: false },
+          sprints: { $set: action.payload }
+        }
+      });
+    case PlanningView.GET_ALL_SPRINTS_FAIL:
+      return update(state, {
+        sprints: {
+          loading: { $set: false },
+          error: { $set: action.payload },
         }
       });
     case PlanningView.GET_SPRINT_DETAILS_SUCCESS:
@@ -100,14 +117,12 @@ export default (state = INITIAL_STATE, action) => {
         voting: {
           loading: { $set: true },
           error: { $set: null },
-          result: { $set: null },
         }
       });
     case PlanningView.VOTE_STORY_SUCCESS:
       return update(state, {
         voting: {
           loading: { $set: false },
-          result: { $set: action.payload }
         }
       });
     case PlanningView.VOTE_STORY_FAIL:
