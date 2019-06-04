@@ -47,7 +47,7 @@ class PlanningView extends Component {
           <StoriesTable stories={stories} />
         </div>
         {/* Voting Card Area */}
-        <div className="col" id={'votins-area-container'}>
+        <div className="col" id={'voting-area-container'}>
           <VotingArea
             voter={0}
             sprintName={this.props.match.params.name}

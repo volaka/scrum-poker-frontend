@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import * as classnames from 'classnames';
 import has from 'lodash/has';
 import styles from './App.scss';
@@ -14,6 +14,10 @@ import DeveloperView from './views/DeveloperView/DeveloperView';
 class App extends React.Component {
   render() {
     console.log(window.location.origin);
+    const devLink = `/poker-planning-view-as-developer/${
+      has(this.props.details.details, 'dev_link') ?
+        this.props.details.details.dev_link : ''
+    }`;
     return (
       <div className={classnames('container', styles.container)}>
         <div className={'row'}>
@@ -28,13 +32,7 @@ class App extends React.Component {
             {
               this.props.router.location.pathname.match(/.*scrum-master.*/) &&
               this.props.router.location.pathname.match(/.*scrum-master.*/).length > 0 &&
-              <span>
-              {window.location.origin}/poker-planning-view-as-developer/
-                {
-                  has(this.props.details.details, 'dev_link') ?
-                    this.props.details.details.dev_link : ''
-                }
-            </span>
+              <Link to={devLink}>{window.location.origin}{devLink}</Link>
             }
           </div>
         </div>

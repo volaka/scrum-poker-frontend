@@ -11,7 +11,10 @@ class VotingArea extends Component {
     const { votes, voter, stories, sprintName } = this.props;
     const storyId = getActiveStoryId(stories);
     const voterVoteResult = didVote(votes, voter);
-    console.log(storyId, point, voter, sprintName);
+    if (this.props.voter === -1) {
+      alert('Please select voter first');
+      return;
+    }
     if (storyId) {
       if (voterVoteResult === -1) this.props.voteStory(storyId, point, voter, sprintName);
       else this.props.changeVote(voteId(votes, voter), point, sprintName);
