@@ -22,12 +22,14 @@ class PlanningView extends Component {
     getSprintStories(match.params.name);
     getSprintActiveStoryVotes(match.params.name);
     // Set 2 Second API call interval
+    /*
     this.sprintStoriesInterval = setInterval(
       () => getSprintStories(match.params.name),
       2000);
     this.storyVotesInterval = setInterval(
       () => getSprintActiveStoryVotes(match.params.name),
       2000);
+      */
   }
 
   componentWillUnmount() {

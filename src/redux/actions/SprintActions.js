@@ -125,6 +125,29 @@ export const changeVote = (voteId, point, sprintName) => dispatch => {
     });
 };
 
+export const setNewDevLink = (name, newLink) => dispatch => {
+  dispatch({ type: PlanningView.CHANGE_DEV_LINK_REQUEST });
+  axios({
+    method: 'PUT',
+    url: '/api/sprint/link',
+    data: {
+      name,
+      newLink
+    }
+  }).then(() => {
+    dispatch({
+      type: PlanningView.CHANGE_DEV_LINK_SUCCESS,
+    });
+    dispatch(getSprintDetails(newLink));
+  })
+    .catch(error => {
+      dispatch({
+        type: PlanningView.CHANGE_DEV_LINK_FAIL,
+        payload: error.response.data.result || error.response.message
+      });
+    });
+};
+
 export const finalizeStory = (sprintName, point) => dispatch => {
   dispatch({ type: PlanningView.FINALIZE_STORY_REQUEST });
   axios({
