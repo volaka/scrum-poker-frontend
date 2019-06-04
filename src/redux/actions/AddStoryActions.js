@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { push } from 'connected-react-router';
 import { AddStory } from '../types';
+import { getAllSprints } from './SprintActions';
 
 /***
  * This functions makes a request to backend
@@ -15,6 +16,7 @@ export const addSprint = (data) => dispatch => {
   }).then(() => {
     dispatch({ type: AddStory.ADD_SPRINT_SUCCESS });
     dispatch(push(`/poker-planning-view-as-scrum-master/${data.name}`));
+    dispatch(getAllSprints());
   })
     .catch(error => {
       dispatch({
