@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { PlanningView } from '../types';
+import { baseURL } from '../../utils/api/constants';
 
 export const getAllSprints = () => dispatch => {
   dispatch({ type: PlanningView.GET_ALL_SPRINTS_REQUEST });
   axios({
     method: 'GET',
-    url: '/api/sprint'
+    url: '/api/sprint',
+    baseURL
   }).then(response => {
     dispatch({
       type: PlanningView.GET_ALL_SPRINTS_SUCCESS,
@@ -24,7 +26,8 @@ export const getSprintDetails = (name) => dispatch => {
   dispatch({ type: PlanningView.GET_SPRINT_DETAILS_REQUEST });
   axios({
     method: 'GET',
-    url: `/api/sprint/${name}`
+    url: `/api/sprint/${name}`,
+    baseURL
   }).then(response => {
     dispatch({
       type: PlanningView.GET_SPRINT_DETAILS_SUCCESS,
@@ -43,7 +46,8 @@ export const getSprintStories = (name) => dispatch => {
   dispatch({ type: PlanningView.GET_SPRINT_STORIES_REQUEST });
   axios({
     method: 'GET',
-    url: `/api/sprint/${name}/stories`
+    url: `/api/sprint/${name}/stories`,
+    baseURL
   }).then(response => {
     dispatch({
       type: PlanningView.GET_SPRINT_STORIES_SUCCESS,
@@ -62,7 +66,8 @@ export const getSprintActiveStoryVotes = (name) => dispatch => {
   dispatch({ type: PlanningView.GET_SPRINT_ACTIVE_STORY_VOTES_REQUEST });
   axios({
     method: 'GET',
-    url: `/api/sprint/${name}/active/votes`
+    url: `/api/sprint/${name}/active/votes`,
+    baseURL
   }).then(response => {
     dispatch({
       type: PlanningView.GET_SPRINT_ACTIVE_STORY_VOTES_SUCCESS,
@@ -82,6 +87,7 @@ export const voteStory = (storyId, point, voter, sprintName) => dispatch => {
   axios({
     method: 'POST',
     url: '/api/story/vote',
+    baseURL,
     data: {
       storyId,
       point,
@@ -106,6 +112,7 @@ export const changeVote = (voteId, point, sprintName) => dispatch => {
   axios({
     method: 'PUT',
     url: '/api/story/vote',
+    baseURL,
     data: {
       voteId,
       point
@@ -130,6 +137,7 @@ export const setNewDevLink = (name, newLink) => dispatch => {
   axios({
     method: 'PUT',
     url: '/api/sprint/link',
+    baseURL,
     data: {
       name,
       newLink
@@ -153,6 +161,7 @@ export const finalizeStory = (sprintName, point) => dispatch => {
   axios({
     method: 'PUT',
     url: '/api/story/finalize',
+    baseURL,
     data: {
       sprintName,
       point

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { push } from 'connected-react-router';
 import { AddStory } from '../types';
 import { getAllSprints } from './SprintActions';
+import { baseURL } from '../../utils/api/constants';
 
 /***
  * This functions makes a request to backend
@@ -12,6 +13,7 @@ export const addSprint = (data) => dispatch => {
   axios({
     method: 'POST',
     url: '/api/sprint',
+    baseURL,
     data
   }).then(() => {
     dispatch({ type: AddStory.ADD_SPRINT_SUCCESS });

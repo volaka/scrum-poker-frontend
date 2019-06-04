@@ -44,4 +44,9 @@ poker application. You can access it from
     You can then serve it with nginx|apache or with `npx serve dist`
 * `npm run build:docker` will create docker image
 * `npm run start:docker` will start the created docker container 
-    in production
+    in production.
+    > PS: For production environment, backend api url should be set.
+        For development environment, webpack-dev-server uses proxy config
+        to proxy requests to backend api host. For production server,
+        baseURL config in utils/api/constants file should be set to 
+        backend url. 
