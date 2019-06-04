@@ -41,7 +41,7 @@ poker application. You can access it from
 
 * `npm start` will start the developer server (w/ webpack-dev-server)
 * `npm build` will build the repo and will create a `dist` folder. 
-    You can then serve it with nginx|apache or with `npx serve dist`
+    You can then serve it with nginx|apache or with `npx serve --single dist`
 * `npm run build:docker` will create docker image
 * `npm run start:docker` will start the created docker container 
     in production.
