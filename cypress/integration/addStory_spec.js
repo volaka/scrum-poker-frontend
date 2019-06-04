@@ -46,4 +46,13 @@ describe('Add Story Test', () => {
     cy.get('[name="storyList"]').type('Story 1');
     cy.get('.ui.form.error ').should('not.exist');
   });
+  it('should redirect to planning page after session created.', () => {
+    cy.visit('/poker-planning-add-story-list');
+    cy.get('[name="name"]').type('Sprint 3');
+    cy.get('[name="voter"]').clear().type('3');
+    cy.get('[name="storyList"]').clear().type('Story 1\nStory2\nStory3');
+    cy.contains('Start Session').click();
+    cy.url().should('include', '/poker-planning-view-as-scrum-master');
+    cy.url().should('include', '/Sprint%203');
+  });
 });
