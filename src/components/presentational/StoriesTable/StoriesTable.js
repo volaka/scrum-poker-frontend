@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dimmer, Loader, Table } from 'semantic-ui-react';
-import ErrorMessage from '../../ErrorMessage/ErrorMessage';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const StoriesTable = ({ stories }) => (
   // eslint-disable-next-line no-nested-ternary

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './ScrumMasterPortal.scss';
 import { isValidPoint, votingCanEnd } from '../../../utils';
-import { finalizeStory } from '../../../redux/actions/PlanningViewActions';
+import { finalizeStory } from '../../../redux/actions/SprintActions';
 import PortalHeader from '../../presentational/ScrumMasterPortal/PortalHeader/PortalHeader';
 import VoteResults from '../../presentational/ScrumMasterPortal/VoteResults/VoteResults';
 // eslint-disable-next-line max-len
@@ -57,8 +57,8 @@ ScrumMasterPortal.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  details: state.planningView.details,
-  votes: state.planningView.votes
+  details: state.sprint.details,
+  votes: state.sprint.votes
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

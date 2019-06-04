@@ -51,9 +51,9 @@ App.propTypes = {
   router: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ router, planningView }) => ({
+const mapStateToProps = ({ router, sprint }) => ({
   router,
-  details: planningView.details
+  details: sprint.details
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);

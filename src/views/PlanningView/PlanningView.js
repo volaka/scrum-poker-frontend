@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import styles from './PlanningView.scss';
 import {
   getSprintActiveStoryVotes, getSprintDetails, getSprintStories
-} from '../../redux/actions/PlanningViewActions';
-import StoriesTable from '../../components/presentational/PlanningView/StoriesTable/StoriesTable';
+} from '../../redux/actions/SprintActions';
+import StoriesTable from '../../components/presentational/StoriesTable/StoriesTable';
 import VotingArea from '../../components/smart/VotingArea/VotingArea';
 import { getActiveStoryName } from '../../utils';
 import ScrumMasterPortal from '../../components/smart/ScrumMasterPortal/ScrumMasterPortal';
@@ -37,7 +37,7 @@ class PlanningView extends Component {
   }
 
   render() {
-    const { stories } = this.props.planningViewState;
+    const { stories } = this.props.sprintState;
     const storyName = getActiveStoryName(stories);
     return (
       <div className={classnames('row', styles['planning-container'])} id={'planning-container'}>
@@ -69,12 +69,12 @@ PlanningView.propTypes = {
   router: PropTypes.object.isRequired,
   getSprintDetails: PropTypes.func.isRequired,
   getSprintStories: PropTypes.func.isRequired,
-  planningViewState: PropTypes.object.isRequired,
+  sprintState: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ router, planningView }) => ({
+const mapStateToProps = ({ router, sprint }) => ({
   router,
-  planningViewState: planningView
+  sprintState: sprint
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

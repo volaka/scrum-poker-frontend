@@ -5,10 +5,10 @@ import { Dropdown } from 'semantic-ui-react';
 import has from 'lodash/has';
 import times from 'lodash/times';
 import * as classnames from 'classnames';
-import StoriesTable from '../../components/presentational/PlanningView/StoriesTable/StoriesTable';
+import StoriesTable from '../../components/presentational/StoriesTable/StoriesTable';
 import {
   getSprintActiveStoryVotes, getSprintDetails, getSprintStories
-} from '../../redux/actions/PlanningViewActions';
+} from '../../redux/actions/SprintActions';
 import VotingArea from '../../components/smart/VotingArea/VotingArea';
 import styles from './DeveloperView.scss';
 // import PropTypes from 'prop-types';
@@ -81,8 +81,8 @@ class DeveloperView extends Component {
 DeveloperView.propTypes = {};
 
 const mapStateToProps = (state) => ({
-  stories: state.planningView.stories,
-  details: state.planningView.details
+  stories: state.sprint.stories,
+  details: state.sprint.details
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CardGroup from '../../presentational/VotingArea/CardGroup/CardGroup';
 import { didVote, getActiveStoryId, getActiveStoryName, voteId } from '../../../utils';
-import { voteStory, changeVote } from '../../../redux/actions/PlanningViewActions';
+import { voteStory, changeVote } from '../../../redux/actions/SprintActions';
 
 class VotingArea extends Component {
   handleVoting = (point) => {
@@ -47,8 +47,8 @@ VotingArea.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  votes: state.planningView.votes,
-  stories: state.planningView.stories,
+  votes: state.sprint.votes,
+  stories: state.sprint.stories,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
